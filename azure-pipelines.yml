@@ -26,8 +26,12 @@ steps:
   inputs:
     targetType: 'inline'
     script: 'npx -p vsce -c "package"'
+    pwsh: true
+    workingDirectory: 'src/'
 - task: PowerShell@2
   displayName: 'publish the package'
   inputs:
     targetType: 'inline'
     script: 'npx -p vsce -c "publish minor -p $(PATToPublish)""'
+    pwsh: true
+    workingDirectory: 'src/'
