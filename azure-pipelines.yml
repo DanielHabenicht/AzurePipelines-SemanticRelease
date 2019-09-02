@@ -40,6 +40,6 @@ steps:
   displayName: 'publish the package'
   inputs:
     targetType: 'inline'
-    script: 'npx -p tfx-cli -c "vsce publish minor -p $(PATToPublish) --publisher $(publisherId) --extension-id $(extensionId)"'
+    script: 'npx -p tfx-cli -c "tfx publish -p $(PATToPublish) --publisher $(publisherId) --extension-id $(extensionId) --share-with $(shareWith)"'
     pwsh: true
     workingDirectory: '$(Build.ArtifactStagingDirectory)'
