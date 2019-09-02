@@ -47,6 +47,6 @@ steps:
   displayName: 'publish the package'
   inputs:
     targetType: 'inline'
-    script: '$(Build.SourcesDirectory)/bin/tfx extension publish -p $(PATToPublish) --publisher $(publisherId) --extension-id $(extensionId) --share-with $(shareWith)'
+    script: '$(Build.SourcesDirectory)/bin/tfx extension publish --auth-type pat -t $(PATToPublish) --publisher $(publisherId) --extension-id $(extensionId) --share-with $(shareWith)'
     pwsh: true
     workingDirectory: '$(Build.ArtifactStagingDirectory)'
