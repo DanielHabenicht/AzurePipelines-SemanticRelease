@@ -1,9 +1,10 @@
 {
-  "name": "semantic-release",
+  "name": "semantic-release-azure-task",
   "version": "0.0.2",
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "nodemon --inspect",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -25,11 +26,18 @@
   },
   "homepage": "https://github.com/DanielHabenicht/AzurePipelines-SemanticRelease#readme",
   "dependencies": {
-    "azure-pipelines-task-lib": "^2.8.0"
+    "azure-pipelines-task-lib": "^2.8.0",
+    "semantic-release": "^15.13.24",
+    "shelljs": "^0.8.3"
   },
   "devDependencies": {
     "@types/mocha": "^5.2.7",
     "@types/node": "^12.7.3",
-    "@types/q": "^1.5.2"
+    "@types/q": "^1.5.2",
+    "@types/shelljs": "^0.8.5",
+    "mocha": "^6.2.0",
+    "nodemon": "^1.19.1",
+    "ts-node": "^8.3.0",
+    "typescript": "^3.6.2"
   }
 }

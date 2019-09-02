@@ -1,6 +1,6 @@
 {
     "id": "5380aecd-b378-4e53-a927-95d9e52d3b7f",
-    "name": "semanticRelease",
+    "name": "semanticReleaseAzureTask",
     "friendlyName": "Semantic Release",
     "description": "Task for simplifing Semantic Release",
     "helpMarkDown": "",
@@ -9,14 +9,21 @@
     "version": {
         "Major": 0,
         "Minor": 0,
-        "Patch": 2
+        "Patch": 7
     },
-    "instanceNameFormat": "Echo $(samplestring)",
+    "instanceNameFormat": "Semantic Release",
     "inputs": [
+        {
+            "name": "gitHubServiceName",
+            "type": "connectedService:github:OAuth,PersonalAccessToken",
+            "label": "GitHub connection (OAuth or PAT)",
+            "required": true,
+            "helpMarkDown": "Specify the name of the GitHub service connection to use to connect to the GitHub repository. The connection must be based on a GitHub user's OAuth or a GitHub personal access token. Learn more about service connections [here](https://aka.ms/AA3am5s)."
+        },
         {
             "name": "configType",
             "type": "radio",
-            "label": "",
+            "label": "Configuration Type",
             "defaultValue": "filePath",
             "required": false,
             "helpMarkDown": "Arguments passed to the shell script",
@@ -38,7 +45,7 @@
             "name": "disableAutoCwd",
             "type": "multiLine",
             "label": "Config",
-            "defaultValue": "false",
+            "defaultValue": "",
             "required": true,
             "visibleRule": "configType = inline",
             "helpMarkDown": "The Configuration."
