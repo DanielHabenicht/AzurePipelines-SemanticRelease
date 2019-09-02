@@ -47,13 +47,13 @@ steps:
   displayName: 'package the package'
   inputs:
     targetType: 'inline'
-    script: '$(Build.SourcesDirectory)/bin/lib/tfx extension create --manifest-globs vss-extension.json --rev-version --output-path $(Build.ArtifactStagingDirectory) --publisher $(publisherId) --extension-id $(extensionId)'
+    script: '$(Build.SourcesDirectory)/bin/lib/bin/tfx extension create --manifest-globs vss-extension.json --rev-version --output-path $(Build.ArtifactStagingDirectory) --publisher $(publisherId) --extension-id $(extensionId)'
     pwsh: true
     workingDirectory: 'src/'
 - task: PowerShell@2
   displayName: 'publish the package'
   inputs:
     targetType: 'inline'
-    script: '$(Build.SourcesDirectory)/bin/lib/tfx extension publish -p $(PATToPublish) --publisher $(publisherId) --extension-id $(extensionId) --share-with $(shareWith)'
+    script: '$(Build.SourcesDirectory)/bin/lib/bin/tfx extension publish -p $(PATToPublish) --publisher $(publisherId) --extension-id $(extensionId) --share-with $(shareWith)'
     pwsh: true
     workingDirectory: '$(Build.ArtifactStagingDirectory)'
