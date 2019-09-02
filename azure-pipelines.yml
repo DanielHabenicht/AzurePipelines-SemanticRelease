@@ -31,7 +31,7 @@ steps:
     workingDirectory: 'src/semanticRelease'
 - task: Npm@1
   displayName: 'install tfx-cli'
-  enabled: false
+  enabled: true
   inputs:
     command: 'custom'
     customCommand: 'install -g tfx-cli'
