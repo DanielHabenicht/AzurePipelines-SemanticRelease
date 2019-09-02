@@ -33,27 +33,20 @@ steps:
   displayName: 'install tfx-cli'
   inputs:
     targetType: 'inline'
-    script: 'npm install --prefix $(Build.SourcesDirectory)/bin/lib -g tfx-cli'
+    script: 'npm install --prefix $(Build.SourcesDirectory) -g tfx-cli'
     pwsh: true
     workingDirectory: ''
 - task: PowerShell@2
   displayName: 'package the package'
   inputs:
     targetType: 'inline'
-    script: 'Get-ChildItem -Recurse'
-    pwsh: true
-    workingDirectory: '$(Build.SourcesDirectory)/bin/lib'
-- task: PowerShell@2
-  displayName: 'package the package'
-  inputs:
-    targetType: 'inline'
-    script: '$(Build.SourcesDirectory)/bin/lib/bin/tfx extension create --manifest-globs vss-extension.json --rev-version --output-path $(Build.ArtifactStagingDirectory) --publisher $(publisherId) --extension-id $(extensionId)'
+    script: '$(Build.SourcesDirectory)/bin/tfx extension create --manifest-globs vss-extension.json --rev-version --output-path $(Build.ArtifactStagingDirectory) --publisher $(publisherId) --extension-id $(extensionId)'
     pwsh: true
     workingDirectory: 'src/'
 - task: PowerShell@2
   displayName: 'publish the package'
   inputs:
     targetType: 'inline'
-    script: '$(Build.SourcesDirectory)/bin/lib/bin/tfx extension publish -p $(PATToPublish) --publisher $(publisherId) --extension-id $(extensionId) --share-with $(shareWith)'
+    script: '$(Build.SourcesDirectory)/bin/tfx extension publish -p $(PATToPublish) --publisher $(publisherId) --extension-id $(extensionId) --share-with $(shareWith)'
     pwsh: true
     workingDirectory: '$(Build.ArtifactStagingDirectory)'
