@@ -15,8 +15,16 @@ steps:
   inputs:
     command: 'install'
     workingDir: 'src/semanticRelease'
+- task: Npm@1
+  displayName: 'build'
+  enabled: false
+  inputs:
+    command: 'custom'
+    workingDir: 'src/semanticRelease'
+    customCommand: 'run build'
 - task: PowerShell@2
   displayName: 'run tsc'
+  enabled: true
   inputs:
     targetType: 'inline'
     script: 'tsc'
@@ -25,13 +33,13 @@ steps:
   displayName: 'package the package'
   inputs:
     targetType: 'inline'
-    script: 'npx -p vsce -c "vsce package"'
+    script: 'npx -p tfx-cli -c "tfx extension create --manifest-globs vss-extension.json --rev-version --output-path $(Build.ArtifactStagingDirectory) --publisher $(publisherId) --extension-id $(extensionId)"'
     pwsh: true
     workingDirectory: 'src/'
 - task: PowerShell@2
   displayName: 'publish the package'
   inputs:
     targetType: 'inline'
-    script: 'npx -p vsce -c "vsce publish minor -p $(PATToPublish)"'
+    script: 'npx -p tfx-cli -c "vsce publish minor -p $(PATToPublish) --publisher $(publisherId) --extension-id $(extensionId)"'
     pwsh: true
-    workingDirectory: 'src/'
+    workingDirectory: '$(Build.ArtifactStagingDirectory)'
