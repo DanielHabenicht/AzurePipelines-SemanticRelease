@@ -14,22 +14,20 @@ steps:
   displayName: 'install packages'
   inputs:
     command: 'install'
-- task: Npm@1
-  displayName: 'install packages'
+    workingDir: '/src/semanticRelease/'
+- task: PowerShell@2
+  displayName: 'run tsc'
   inputs:
-    command: 'install'
-- task: Npm@1
-  displayName: 'install VSCE'
-  inputs:
-    command: 'custom'
-    customCommand: 'install -g vsce'
+    targetType: 'inline'
+    script: 'tsc'
+    workingDirectory: '/src/semanticRelease/'
 - task: PowerShell@2
   displayName: 'package the package'
   inputs:
     targetType: 'inline'
-    script: 'vsce package'
+    script: 'npx -p vsce -c "package"'
 - task: PowerShell@2
   displayName: 'publish the package'
   inputs:
     targetType: 'inline'
-    script: 'vsce publish minor -p $(PATToPublish)'
+    script: 'npx -p vsce -c "publish minor -p $(PATToPublish)""'
