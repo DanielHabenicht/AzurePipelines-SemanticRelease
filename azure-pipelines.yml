@@ -14,10 +14,11 @@ steps:
   displayName: 'install packages'
   inputs:
     command: 'install'
-- task: Npm@1
+- task: PowerShell@2
   displayName: 'install packages'
   inputs:
-    command: 'install'
+    targetType: 'inline'
+    script: 'tsc'
 - task: Npm@1
   displayName: 'install VSCE'
   inputs:
