@@ -14,13 +14,13 @@ steps:
   displayName: 'install packages'
   inputs:
     command: 'install'
-    workingDir: '/src/semanticRelease/'
+    workingDir: 'src/semanticRelease'
 - task: PowerShell@2
   displayName: 'run tsc'
   inputs:
     targetType: 'inline'
     script: 'tsc'
-    workingDirectory: '/src/semanticRelease/'
+    workingDirectory: 'src/semanticRelease'
 - task: PowerShell@2
   displayName: 'package the package'
   inputs:
