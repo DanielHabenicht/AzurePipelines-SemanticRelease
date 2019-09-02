@@ -1,0 +1,52 @@
+{
+    "id": "5380aecd-b378-4e53-a927-95d9e52d3b7f",
+    "name": "semanticRelease",
+    "friendlyName": "Semantic Release",
+    "description": "Task for simplifing Semantic Release",
+    "helpMarkDown": "",
+    "category": "Utility",
+    "author": "Daniel Habenicht",
+    "version": {
+        "Major": 0,
+        "Minor": 0,
+        "Patch": 2
+    },
+    "instanceNameFormat": "Echo $(samplestring)",
+    "inputs": [
+        {
+            "name": "configType",
+            "type": "radio",
+            "label": "",
+            "defaultValue": "filePath",
+            "required": false,
+            "helpMarkDown": "Arguments passed to the shell script",
+            "options": {
+                "filePath": "File Path",
+                "inline": "Inline"
+            }
+        },
+        {
+            "name": "configPath",
+            "type": "filePath",
+            "label": "Config Path",
+            "defaultValue": "",
+            "required": true,
+            "visibleRule": "configType = filePath",
+            "helpMarkDown": "Relative path from repo root of the config file."
+        },
+        {
+            "name": "disableAutoCwd",
+            "type": "multiLine",
+            "label": "Config",
+            "defaultValue": "false",
+            "required": true,
+            "visibleRule": "configType = inline",
+            "helpMarkDown": "The Configuration."
+        }
+    ],
+    "execution": {
+        "Node": {
+            "target": "index.js"
+        }
+    }
+}
