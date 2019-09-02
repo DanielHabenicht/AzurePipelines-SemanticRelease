@@ -32,6 +32,6 @@ steps:
   displayName: 'publish the package'
   inputs:
     targetType: 'inline'
-    script: 'npx -p vsce -c "publish minor -p $(PATToPublish)""'
+    script: 'npx -p vsce -c "publish minor -p $(PATToPublish)"'
     pwsh: true
     workingDirectory: 'src/'
