@@ -1,0 +1,36 @@
+{
+    "manifestVersion": 1,
+    "id": "semantic-release",
+    "name": "Semantic Release",
+    "version": "0.0.2",
+    "publisher": "danielhabenicht",
+    "targets": [
+        {
+            "id": "Microsoft.VisualStudio.Services"
+        }
+    ],
+    "description": "Semantic Release in one task.",
+    "categories": [
+        "Azure Pipelines"
+    ],
+    "icons": {
+        "default": "images/extension-icon.png"
+    },
+    "files": [
+        {
+            "path": "semanticRelease"
+        }
+    ],
+    "contributions": [
+        {
+            "id": "custom-build-release-task",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [
+                "ms.vss-distributed-task.tasks"
+            ],
+            "properties": {
+                "name": "semanticRelease"
+            }
+        }
+    ]
+}

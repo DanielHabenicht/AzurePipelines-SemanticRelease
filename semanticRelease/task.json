@@ -1,0 +1,30 @@
+{
+    "id": "5380aecd-b378-4e53-a927-95d9e52d3b7f",
+    "name": "semanticRelease",
+    "friendlyName": "Semantic Release",
+    "description": "Task for simplifing Semantic Release",
+    "helpMarkDown": "",
+    "category": "Utility",
+    "author": "Daniel Habenicht",
+    "version": {
+        "Major": 0,
+        "Minor": 0,
+        "Patch": 2
+    },
+    "instanceNameFormat": "Echo $(samplestring)",
+    "inputs": [
+        {
+            "name": "samplestring",
+            "type": "string",
+            "label": "Sample String",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "A sample string"
+        }
+    ],
+    "execution": {
+        "Node": {
+            "target": "index.js"
+        }
+    }
+}
