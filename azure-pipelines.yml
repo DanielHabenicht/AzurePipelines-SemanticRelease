@@ -10,10 +10,26 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
-
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+- task: Npm@1
+  displayName: 'install packages'
+  inputs:
+    command: 'install'
+- task: Npm@1
+  displayName: 'install packages'
+  inputs:
+    command: 'install'
+- task: Npm@1
+  displayName: 'install VSCE'
+  inputs:
+    command: 'custom'
+    customCommand: 'install -g vsce'
+- task: PowerShell@2
+  displayName: 'package the package'
+  inputs:
+    targetType: 'inline'
+    script: 'vsce package'
+- task: PowerShell@2
+  displayName: 'publish the package'
+  inputs:
+    targetType: 'inline'
+    script: 'vsce publish minor -p $(PATToPublish)'
