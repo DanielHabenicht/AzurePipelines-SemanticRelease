@@ -29,17 +29,23 @@ steps:
     targetType: 'inline'
     script: 'tsc'
     workingDirectory: 'src/semanticRelease'
+- task: Npm@1
+  displayName: 'install tfx-cli'
+  enabled: false
+  inputs:
+    command: 'custom'
+    customCommand: 'install -g tfx-cli'
 - task: PowerShell@2
   displayName: 'package the package'
   inputs:
     targetType: 'inline'
-    script: 'npx -p tfx-cli -c "tfx extension create --manifest-globs vss-extension.json --rev-version --output-path $(Build.ArtifactStagingDirectory) --publisher $(publisherId) --extension-id $(extensionId)"'
+    script: 'tfx extension create --manifest-globs vss-extension.json --rev-version --output-path $(Build.ArtifactStagingDirectory) --publisher $(publisherId) --extension-id $(extensionId)'
     pwsh: true
     workingDirectory: 'src/'
 - task: PowerShell@2
   displayName: 'publish the package'
   inputs:
     targetType: 'inline'
-    script: 'npx -p tfx-cli -c "tfx extension publish -p $(PATToPublish) --publisher $(publisherId) --extension-id $(extensionId) --share-with $(shareWith)"'
+    script: 'tfx extension publish -p $(PATToPublish) --publisher $(publisherId) --extension-id $(extensionId) --share-with $(shareWith)'
     pwsh: true
     workingDirectory: '$(Build.ArtifactStagingDirectory)'
