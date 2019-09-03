@@ -13,6 +13,7 @@
                 "-r",
                 "ts-node/register"
             ],
+            "envFile": "${workspaceRoot}/src/semanticRelease/.env",
             "sourceMaps": true,
             "cwd": "${workspaceRoot}/src/semanticRelease",
             "protocol": "inspector",
