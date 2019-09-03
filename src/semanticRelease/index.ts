@@ -1,38 +1,57 @@
 import tl = require('azure-pipelines-task-lib/task');
-import { exec } from 'child_process';
 import { Utility } from './utility/utility';
+const semanticRelease = require('semantic-release');
+const fs = require('fs');
+
+export enum ConfigType {
+  filePath = 'filePath',
+  inline = 'inline'
+}
+
+// Look for other parts of this extension here: $(Work_Folder)/_tasks/semanticReleaseAzureTask/...
 
 async function run() {
-  // function run() {
-  /* for debug*/
-
   try {
-    const inputString: string = tl.getInput('gitHubServiceName', true);
-    console.log('' + inputString);
+    const configType: ConfigType = tl.getInput('configType', true) as ConfigType;
+
+    let semanticReleaseOption = {};
+
+    if (configType === ConfigType.filePath) {
+      JSON.parse(fs.readFileSync(tl.getPathInput('configPath', true, true), 'utf8'));
+    } else {
+      semanticReleaseOption = JSON.parse(tl.getInput('configMultiline', true));
+    }
     const githubEndpoint = tl.getInput('gitHubServiceName', true);
     const githubEndpointToken = Utility.getGithubEndPointToken(githubEndpoint);
     process.env.GH_TOKEN = githubEndpointToken;
 
-    console.log(tl.execSync('ls', ''));
-    console.log(tl.execSync('cd', 'semanticRelease'));
-    console.log(tl.execSync('ls', ''));
-    console.log(tl.execSync('cd', '..'));
+    const result = await semanticRelease(semanticReleaseOption, {
+      // Run semantic-release from `/path/to/git/repo/root` without having to change local process `cwd` with `process.chdir()`
+      cwd: tl.getVariable('Build.Repository.LocalPath'),
+      // Pass the variable `MY_ENV_VAR` to semantic-release without having to modify the local `process.env`
+      env: { ...process.env, GH_TOKEN: githubEndpointToken },
+      // Store stdout and stderr to use later instead of writing to `process.stdout` and `process.stderr`
+      stdout: process.stdout,
+      stderr: process.stderr
+    });
 
-    exec('npm install semantic-release', function(code, stdout, stderr) {
-      console.log('Exit code:', code);
-      console.log('Program output:', stdout);
-      if (stderr) {
-        throw stderr;
+    if (result) {
+      const { lastRelease, commits, nextRelease, releases } = result;
+
+      console.log(
+        `Published ${nextRelease.type} release version ${nextRelease.version} containing ${commits.length} commits.`
+      );
+
+      if (lastRelease.version) {
+        console.log(`The last release was "${lastRelease.version}".`);
       }
 
-      exec(`semantic-release`, function(code, stdout, stderr) {
-        console.log('Exit code:', code);
-        console.log('Program output:', stdout);
-        if (stderr) {
-          throw stderr;
-        }
-      });
-    });
+      for (const release of releases) {
+        console.log(`The release was published with plugin "${release.pluginName}".`);
+      }
+    } else {
+      console.log('No release published.');
+    }
   } catch (err) {
     tl.setResult(tl.TaskResult.Failed, err.message);
   }

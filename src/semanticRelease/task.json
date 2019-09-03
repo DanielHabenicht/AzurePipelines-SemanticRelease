@@ -9,9 +9,10 @@
     "version": {
         "Major": 0,
         "Minor": 0,
-        "Patch": 7
+        "Patch": 13
     },
     "instanceNameFormat": "Semantic Release",
+    "minimumAgentVersion": "2.144.0",
     "inputs": [
         {
             "name": "gitHubServiceName",
@@ -42,7 +43,7 @@
             "helpMarkDown": "Relative path from repo root of the config file."
         },
         {
-            "name": "disableAutoCwd",
+            "name": "configMultiline",
             "type": "multiLine",
             "label": "Config",
             "defaultValue": "",
@@ -52,7 +53,7 @@
         }
     ],
     "execution": {
-        "Node": {
+        "Node10": {
             "target": "index.js"
         }
     }

@@ -1,9 +1,9 @@
 {
     "manifestVersion": 1,
-    "id": null,
+    "id": "semantic-release",
     "name": "Semantic Release",
-    "version": "0.0.2",
-    "publisher": null,
+    "version": "0.0.13",
+    "publisher": "danielhabenicht",
     "targets": [
         {
             "id": "Microsoft.VisualStudio.Services"
