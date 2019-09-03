@@ -58,3 +58,9 @@ steps:
     script: '$(Build.SourcesDirectory)/bin/tfx extension publish --auth-type pat -t $(PATToPublish) --publisher $(publisherId) --extension-id $(extensionId) --share-with $(shareWith) --service-url "https://marketplace.visualstudio.com/" --manifest-globs vss-extension.json --rev-version'
     pwsh: true
     workingDirectory: 'out/'
+- task: PowerShell@2
+  displayName: "commit new manifest to git repo"
+  inputs:
+      targetType: inline
+      script: 'git add "src/vss-extension.json"; git commit -m "increase version number"; git push;'
+      pwsh: true
