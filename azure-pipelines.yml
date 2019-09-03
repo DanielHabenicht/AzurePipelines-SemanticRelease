@@ -38,6 +38,7 @@ steps:
     workingDirectory: ''
 - task: PowerShell@2
   displayName: 'package the package'
+  enabled: false
   inputs:
     targetType: 'inline'
     script: '$(Build.SourcesDirectory)/bin/tfx extension create --manifest-globs vss-extension.json --rev-version --output-path $(Build.ArtifactStagingDirectory) --publisher $(publisherId) --extension-id $(extensionId); Copy-Item vss-extension.json $(Build.ArtifactStagingDirectory)/vss-extension.json'
@@ -54,6 +55,6 @@ steps:
   enabled: true
   inputs:
     targetType: 'inline'
-    script: '$(Build.SourcesDirectory)/bin/tfx extension publish --auth-type pat -t $(PATToPublish) --publisher $(publisherId) --extension-id $(extensionId) --share-with $(shareWith) --service-url "https://marketplace.visualstudio.com/"'
+    script: '$(Build.SourcesDirectory)/bin/tfx extension publish --auth-type pat -t $(PATToPublish) --publisher $(publisherId) --extension-id $(extensionId) --share-with $(shareWith) --service-url "https://marketplace.visualstudio.com/" --manifest-globs vss-extension.json --rev-version'
     pwsh: true
-    workingDirectory: 'src/'
+    workingDirectory: 'out/'
