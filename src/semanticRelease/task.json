@@ -9,7 +9,7 @@
     "version": {
         "Major": 0,
         "Minor": 0,
-        "Patch": 14
+        "Patch": 17
     },
     "instanceNameFormat": "Semantic Release",
     "minimumAgentVersion": "2.144.0",
@@ -50,6 +50,14 @@
             "required": true,
             "visibleRule": "configType = inline",
             "helpMarkDown": "The Configuration."
+        },
+        {
+            "name": "cwd",
+            "type": "filePath",
+            "label": "Working Directory",
+            "defaultValue": "$(Build.Repository.LocalPath)",
+            "required": true,
+            "helpMarkDown": "The Working directory of Semantic Release"
         }
     ],
     "execution": {

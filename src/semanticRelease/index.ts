@@ -29,7 +29,7 @@ async function run() {
       { ...semanticReleaseOption },
       {
         // Run semantic-release from `/path/to/git/repo/root` without having to change local process `cwd` with `process.chdir()`
-        cwd: tl.getVariable('Build.Repository.LocalPath'),
+        cwd: tl.getInput('cwd'),
         // Pass the variable `MY_ENV_VAR` to semantic-release without having to modify the local `process.env`
         env: { ...process.env, GH_TOKEN: githubEndpointToken },
         // Store stdout and stderr to use later instead of writing to `process.stdout` and `process.stderr`
