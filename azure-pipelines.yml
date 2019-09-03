@@ -4,62 +4,12 @@
 # https://aka.ms/yaml
 
 trigger:
-- master
+    - master
 
 pool:
-  vmImage: 'ubuntu-latest'
+    vmImage: "ubuntu-latest"
 
 steps:
-- task: Npm@1
-  displayName: 'install packages'
-  inputs:
-    command: 'install'
-    workingDir: 'src/semanticRelease'
-- task: Npm@1
-  displayName: 'build'
-  enabled: false
-  inputs:
-    command: 'custom'
-    workingDir: 'src/semanticRelease'
-    customCommand: 'run build'
-- task: PowerShell@2
-  displayName: 'run tsc'
-  enabled: true
-  inputs:
-    targetType: 'inline'
-    script: 'tsc --outDir ../../out/semanticRelease; Copy-Item ../vss-extension.json ../../out/vss-extension.json; Copy-Item ../images/ ../../out/images/ -Recurse; Copy-Item task.json ../../out/semanticRelease/task.json'
-    workingDirectory: 'src/semanticRelease'
-- task: PowerShell@2
-  displayName: 'install tfx-cli'
-  inputs:
-    targetType: 'inline'
-    script: 'npm install --prefix $(Build.SourcesDirectory) -g tfx-cli'
-    pwsh: true
-    workingDirectory: ''
-- task: PowerShell@2
-  displayName: 'package the package'  
-  inputs:
-    targetType: 'inline'
-    script: '$(Build.SourcesDirectory)/bin/tfx extension create --manifest-globs vss-extension.json --rev-version --output-path $(Build.ArtifactStagingDirectory) --publisher $(publisherId) --extension-id $(extensionId); Copy-Item vss-extension.json $(Build.ArtifactStagingDirectory)/vss-extension.json'
-    pwsh: true
-    workingDirectory: 'out/'
-
-- task: PublishBuildArtifacts@1
-  inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-    ArtifactName: 'drop'
-    publishLocation: 'Container'
-- task: PowerShell@2
-  displayName: 'publish the package'
-  enabled: true
-  inputs:
-    targetType: 'inline'
-    script: '$(Build.SourcesDirectory)/bin/tfx extension publish --auth-type pat -t $(PATToPublish) --publisher $(publisherId) --extension-id $(extensionId) --share-with $(shareWith) --service-url "https://marketplace.visualstudio.com/" --manifest-globs vss-extension.json --rev-version'
-    pwsh: true
-    workingDirectory: 'out/'
-- task: PowerShell@2
-  displayName: "commit new manifest to git repo"
-  inputs:
-      targetType: inline
-      script: 'git add "src/vss-extension.json"; git commit -m "increase version number"; git push;'
-      pwsh: true
+    - script: |
+          npm run release
+      displayName: "Build and Release"
