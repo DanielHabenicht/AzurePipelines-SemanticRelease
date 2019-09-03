@@ -27,7 +27,7 @@ steps:
   enabled: true
   inputs:
     targetType: 'inline'
-    script: 'tsc --outDir ../../out/semanticRelease; Copy-Item ../vss-extension.json ../../out/vss-extension.json'
+    script: 'tsc --outDir ../../out/semanticRelease; Copy-Item ../vss-extension.json ../../out/vss-extension.json; Copy-Item ../images/ ../../out/images/ -Recurse'
     workingDirectory: 'src/semanticRelease'
 - task: PowerShell@2
   displayName: 'install tfx-cli'
