@@ -51,7 +51,7 @@ steps:
     publishLocation: 'Container'
 - task: PowerShell@2
   displayName: 'publish the package'
-  enabled: false
+  enabled: true
   inputs:
     targetType: 'inline'
     script: '$(Build.SourcesDirectory)/bin/tfx extension publish --auth-type pat -t $(PATToPublish) --publisher $(publisherId) --extension-id $(extensionId) --share-with $(shareWith) --trace-level debug'
