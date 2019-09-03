@@ -25,15 +25,18 @@ async function run() {
     const githubEndpointToken = Utility.getGithubEndPointToken(githubEndpoint);
     process.env.GH_TOKEN = githubEndpointToken;
 
-    const result = await semanticRelease(semanticReleaseOption, {
-      // Run semantic-release from `/path/to/git/repo/root` without having to change local process `cwd` with `process.chdir()`
-      cwd: tl.getVariable('Build.Repository.LocalPath'),
-      // Pass the variable `MY_ENV_VAR` to semantic-release without having to modify the local `process.env`
-      env: { ...process.env, GH_TOKEN: githubEndpointToken },
-      // Store stdout and stderr to use later instead of writing to `process.stdout` and `process.stderr`
-      stdout: process.stdout,
-      stderr: process.stderr
-    });
+    const result = await semanticRelease(
+      { ...semanticReleaseOption },
+      {
+        // Run semantic-release from `/path/to/git/repo/root` without having to change local process `cwd` with `process.chdir()`
+        cwd: tl.getVariable('Build.Repository.LocalPath'),
+        // Pass the variable `MY_ENV_VAR` to semantic-release without having to modify the local `process.env`
+        env: { ...process.env, GH_TOKEN: githubEndpointToken },
+        // Store stdout and stderr to use later instead of writing to `process.stdout` and `process.stderr`
+        stdout: process.stdout,
+        stderr: process.stderr
+      }
+    );
 
     if (result) {
       const { lastRelease, commits, nextRelease, releases } = result;

@@ -33,7 +33,7 @@
     "@semantic-release/release-notes-generator": "^7.3.0",
     "azure-pipelines-task-lib": "^2.8.0",
     "semantic-release": "^15.13.24",
-    "shelljs": "^0.8.3"
+    "semantic-release-docker-test": "^1.0.2"
   },
   "devDependencies": {
     "@types/mocha": "^5.2.7",
