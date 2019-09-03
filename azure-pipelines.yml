@@ -37,8 +37,7 @@ steps:
     pwsh: true
     workingDirectory: ''
 - task: PowerShell@2
-  displayName: 'package the package'
-  enabled: false
+  displayName: 'package the package'  
   inputs:
     targetType: 'inline'
     script: '$(Build.SourcesDirectory)/bin/tfx extension create --manifest-globs vss-extension.json --rev-version --output-path $(Build.ArtifactStagingDirectory) --publisher $(publisherId) --extension-id $(extensionId); Copy-Item vss-extension.json $(Build.ArtifactStagingDirectory)/vss-extension.json'
