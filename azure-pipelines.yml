@@ -27,7 +27,7 @@ steps:
   enabled: true
   inputs:
     targetType: 'inline'
-    script: 'tsc'
+    script: 'tsc --outDir ../../out/semanticRelease; Copy-Item ../vss-extension.json ../../out/vss-extension.json'
     workingDirectory: 'src/semanticRelease'
 - task: PowerShell@2
   displayName: 'install tfx-cli'
@@ -42,7 +42,7 @@ steps:
     targetType: 'inline'
     script: '$(Build.SourcesDirectory)/bin/tfx extension create --manifest-globs vss-extension.json --rev-version --output-path $(Build.ArtifactStagingDirectory) --publisher $(publisherId) --extension-id $(extensionId); Copy-Item vss-extension.json $(Build.ArtifactStagingDirectory)/vss-extension.json'
     pwsh: true
-    workingDirectory: 'src/'
+    workingDirectory: 'out/'
 
 - task: PublishBuildArtifacts@1
   inputs:
