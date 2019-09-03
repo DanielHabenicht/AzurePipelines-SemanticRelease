@@ -15,23 +15,45 @@ steps:
   inputs:
     command: 'install'
     workingDir: 'src/semanticRelease'
+- task: Npm@1
+  displayName: 'build'
+  enabled: false
+  inputs:
+    command: 'custom'
+    workingDir: 'src/semanticRelease'
+    customCommand: 'run build'
 - task: PowerShell@2
   displayName: 'run tsc'
+  enabled: true
   inputs:
     targetType: 'inline'
     script: 'tsc'
     workingDirectory: 'src/semanticRelease'
 - task: PowerShell@2
+  displayName: 'install tfx-cli'
+  inputs:
+    targetType: 'inline'
+    script: 'npm install --prefix $(Build.SourcesDirectory) -g tfx-cli'
+    pwsh: true
+    workingDirectory: ''
+- task: PowerShell@2
   displayName: 'package the package'
   inputs:
     targetType: 'inline'
-    script: 'npx -p vsce -c "vsce package"'
+    script: '$(Build.SourcesDirectory)/bin/tfx extension create --manifest-globs vss-extension.json --rev-version --output-path $(Build.ArtifactStagingDirectory) --publisher $(publisherId) --extension-id $(extensionId); Copy-Item vss-extension.json $(Build.ArtifactStagingDirectory)/vss-extension.json'
     pwsh: true
     workingDirectory: 'src/'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'drop'
+    publishLocation: 'Container'
 - task: PowerShell@2
   displayName: 'publish the package'
+  enabled: false
   inputs:
     targetType: 'inline'
-    script: 'npx -p vsce -c "vsce publish minor -p $(PATToPublish)"'
+    script: '$(Build.SourcesDirectory)/bin/tfx extension publish --auth-type pat -t $(PATToPublish) --publisher $(publisherId) --extension-id $(extensionId) --share-with $(shareWith) --trace-level debug'
     pwsh: true
     workingDirectory: 'src/'
