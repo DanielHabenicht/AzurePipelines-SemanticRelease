@@ -9,6 +9,10 @@
             "id": "Microsoft.VisualStudio.Services"
         }
     ],
+    "galleryFlags": [
+        "Preview"
+    ],
+    "public": true
     "description": "Semantic Release in one task.",
     "categories": [
         "Azure Pipelines"
