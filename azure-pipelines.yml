@@ -5,12 +5,12 @@ pool:
     vmImage: "windows-latest"
 
 steps:
-    - script: |
-          npm install
-      displayName: "install"
-    - script: |
-          npm run publish-test
-      displayName: "Build and Release"
-      env:
+  - script: |
+      npm install
+    displayName: "install"
+  - script: |
+      npm run publish-test
+    displayName: "Build and Release"
+    env:
       GITHUB_TOKEN: $(GH_TOKEN)
       MARKETPLACE_TOKEN: $(PAT_TOKEN)
