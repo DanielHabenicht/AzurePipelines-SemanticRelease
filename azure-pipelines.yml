@@ -14,5 +14,5 @@ steps:
           npm run release
       displayName: "Build and Release"
       env:
-        GH_TOKEN: $(GH_TOKEN)
-        PAT_TOKEN: $(PAT_TOKEN)
+        GITHUB_TOKEN: $(GH_TOKEN)
+        MARKETPLACE_TOKEN: $(PAT_TOKEN)
