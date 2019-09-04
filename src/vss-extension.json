@@ -16,6 +16,26 @@
     "icons": {
         "default": "images/extension-icon.png"
     },
+    "content": {
+        "details": {
+            "path": "README.md"
+        },
+        "license": {
+            "path": "LICENSE"
+        }
+    },
+    "links": {
+        "getstarted": {
+            "uri": "https://github.com/DanielHabenicht/AzurePipelines-SemanticRelease/wiki"
+        },
+        "support": {
+            "uri": "https://github.com/DanielHabenicht/AzurePipelines-SemanticRelease/issues/new"
+        }
+    },
+    "repository": {
+        "type": "git",
+        "uri": "https://github.com/DanielHabenicht/AzurePipelines-SemanticRelease"
+    },
     "files": [
         {
             "path": "semanticRelease"
