@@ -10,6 +10,10 @@ steps:
     displayName: "install"
 
   - script: |
+      echo $SHARED_ORGS
+    displayName: "install"
+
+  - script: |
       echo '##vso[task.setvariable variable=MARKETPLACE_TOKEN]$(PAT_TOKEN)'
     displayName: "variable"
 
