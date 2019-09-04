@@ -10,8 +10,11 @@ steps:
     displayName: "install"
 
   - script: |
-      echo %SHARED_ORGS%
+      echo %MARKETPLACE_TOKEN%
     displayName: "install"
+    env:
+      MARKETPLACE_TOKEN: $(PAT_TOKEN)
+
 
   - script: |
       npm run publish-test
