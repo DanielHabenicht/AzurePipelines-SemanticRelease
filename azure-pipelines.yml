@@ -13,6 +13,7 @@ steps:
     MARKETPLACE_TOKEN: $(PAT_TOKEN)
 
 - task: PublishBuildArtifacts@1
+  continueOnError: true
   inputs:
     PathtoPublish: '$(Build.SourcesDirectory)/dist'
     ArtifactName: 'drop'
