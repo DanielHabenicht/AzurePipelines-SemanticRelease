@@ -12,7 +12,7 @@
     "galleryFlags": [
         "Preview"
     ],
-    "public": true
+    "public": true,
     "description": "Semantic Release in one task.",
     "categories": [
         "Azure Pipelines"
