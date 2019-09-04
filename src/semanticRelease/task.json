@@ -22,6 +22,13 @@
             "helpMarkDown": "Specify the name of the GitHub service connection to use to connect to the GitHub repository. The connection must be based on a GitHub user's OAuth or a GitHub personal access token. Learn more about service connections [here](https://aka.ms/AA3am5s)."
         },
         {
+            "name": "genericServiceName",
+            "type": "connectedService:generic",
+            "label": "Generic Connection for GitHub",
+            "required": false,
+            "helpMarkDown": "Specify the name of the GitHub service connection to use to connect to the GitHub repository. The connection must be based on a GitHub user's OAuth or a GitHub personal access token. Learn more about service connections [here](https://aka.ms/AA3am5s)."
+        },
+        {
             "name": "configType",
             "type": "radio",
             "label": "Configuration Type",
