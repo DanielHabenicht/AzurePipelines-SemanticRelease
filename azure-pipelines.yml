@@ -7,10 +7,11 @@ trigger:
     - master
 
 pool:
-    vmImage: "windows-latest"
+    vmImage: "ubuntu-latest"
 
 steps:
     - script: |
+          sudo npm install -g tfx-cli
           npm run release
       displayName: "Build and Release"
       env:
