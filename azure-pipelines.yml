@@ -5,9 +5,15 @@ pool:
     vmImage: "windows-latest"
 
 steps:
-  - script: |
-      npm run release
-    displayName: "Build and Release"
-    env:
-      GITHUB_TOKEN: $(GH_TOKEN)
-      MARKETPLACE_TOKEN: $(PAT_TOKEN)
+- script: |
+    npm run release
+  displayName: "Build and Release"
+  env:
+    GITHUB_TOKEN: $(GH_TOKEN)
+    MARKETPLACE_TOKEN: $(PAT_TOKEN)
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.SourcesDirectory)/dist'
+    ArtifactName: 'drop'
+    publishLocation: 'Container'
