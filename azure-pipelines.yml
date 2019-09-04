@@ -6,18 +6,7 @@ pool:
 
 steps:
   - script: |
-      npm install
-    displayName: "install"
-
-  - script: |
-      echo %MARKETPLACE_TOKEN%
-    displayName: "install"
-    env:
-      MARKETPLACE_TOKEN: $(PAT_TOKEN)
-
-
-  - script: |
-      npm run publish-test
+      npm run publish
     displayName: "Build and Release"
     env:
       GITHUB_TOKEN: $(GH_TOKEN)
