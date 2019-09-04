@@ -7,7 +7,7 @@
         "build": "cd ./src/semanticRelease && npm install && tsc",
         "pre-package": "rimraf dist && copyfiles -u 1 \"src{/*,}/{vss-extension.json,task.json,package.json,*.png,*.js,/!(tests)/*.js}\" dist -E && cd ./dist/semanticRelease && npm install --only=prod",
         "package": "npm run build && npm run pre-package",
-        "publish": "cd ./dist && cross-env 'tfx extension publish --auth-type pat -t $PAT_TOKEN --service-url \"https://marketplace.visualstudio.com/\" --share-with $SHARED_ORGS --manifest-globs vss-extension.json'",
+        "publish": "cd ./dist && cross-env 'tfx extension publish --auth-type pat -t $MARKETPLACE_TOKEN --service-url \"https://marketplace.visualstudio.com/\" --share-with $SHARED_ORGS --manifest-globs vss-extension.json'",
         "release": "npm install && semantic-release",
         "release-dev": "semantic-release"
     },
