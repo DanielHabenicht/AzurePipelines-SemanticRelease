@@ -4,6 +4,8 @@
 
 This is a Azure DevOps Extension that supplies you with multiple Azure Piplines Tasks that make your release much easier.
 
+It is utilizing [semantic-release](https://github.com/semantic-release/semantic-release). You can either use predefined tasks or hack it your way with the freestyle task. 
+
 Provide multiple Tasks:
 
 - Semantic Release Freestyle (using a `releaserc` file)
