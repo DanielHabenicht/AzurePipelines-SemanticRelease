@@ -16,14 +16,14 @@ steps:
     GITHUB_TOKEN: $(GH_TOKEN)
     MARKETPLACE_TOKEN: $(PAT_TOKEN)
 
-- task: DeleteFiles@1
-  inputs:
-    SourceFolder: '$(Build.SourcesDirectory)/dist'
-    Contents: '!(*.vsix)'
+# - task: DeleteFiles@1
+#   inputs:
+#     SourceFolder: '$(Build.SourcesDirectory)/dist'
+#     Contents: '!(*.vsix)'
 
-- task: PublishBuildArtifacts@1
-  continueOnError: true
-  inputs:
-    PathtoPublish: ''
-    ArtifactName: 'drop'
-    publishLocation: 'Container'
+# - task: PublishBuildArtifacts@1
+#   continueOnError: true
+#   inputs:
+#     PathtoPublish: ''
+#     ArtifactName: 'drop'
+#     publishLocation: 'Container'
