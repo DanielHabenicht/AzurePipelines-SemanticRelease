@@ -19,9 +19,20 @@ async function run() {
 
   const npm = new tr.ToolRunner('npm');
   npm.line('install');
-  npm.exec().then(async () => {
-    await runSemanticRelease();
-  });
+  npm
+    .exec({
+      cwd: localFolder,
+      failOnStdErr: true,
+      ignoreReturnCode: false,
+      env: {},
+      silent: false,
+      windowsVerbatimArguments: false,
+      outStream: process.stdout,
+      errStream: process.stdout
+    })
+    .then(async () => {
+      await runSemanticRelease();
+    });
 }
 
 async function runSemanticRelease() {
