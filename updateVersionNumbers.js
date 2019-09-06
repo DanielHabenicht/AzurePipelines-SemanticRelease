@@ -15,7 +15,7 @@ const vssextension = fs.readFileSync(file1, { encoding: 'utf8' });
 fs.writeFileSync(file1, vssextension.replace(/(version": ")(.*)(")/g, `$1${version}$3`), { encoding: 'utf-8' });
 
 // Update task.json
-const file2 = resolve(__dirname, 'src', 'semanticRelease', 'task.json');
+const file2 = resolve(__dirname, 'src', 'semanticReleaseFreestyle', 'task.json');
 const task = fs.readFileSync(file2, { encoding: 'utf8' });
 fs.writeFileSync(
   file2,

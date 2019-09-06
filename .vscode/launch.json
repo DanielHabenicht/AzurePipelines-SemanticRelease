@@ -6,16 +6,16 @@
             "type": "node",
             "request": "launch",
             "args": [
-                "${workspaceRoot}/src/semanticRelease/index.ts"
+                "${workspaceRoot}/src/semanticReleaseFreestyle/index.ts"
             ],
             "runtimeArgs": [
                 "--nolazy",
                 "-r",
                 "ts-node/register"
             ],
-            "envFile": "${workspaceRoot}/src/semanticRelease/.env",
+            "envFile": "${workspaceRoot}/src/semanticReleaseFreestyle/.env",
             "sourceMaps": true,
-            "cwd": "${workspaceRoot}/src/semanticRelease",
+            "cwd": "${workspaceRoot}/src/semanticReleaseFreestyle",
             "protocol": "inspector",
         },
     ]

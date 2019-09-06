@@ -1,6 +1,6 @@
 import tl = require('azure-pipelines-task-lib/task');
 import { Utility } from './utility/utility';
-const semanticRelease = require('semantic-release');
+const semanticReleaseFreestyle = require('semantic-release');
 const fs = require('fs');
 
 export enum ConfigType {
@@ -8,25 +8,25 @@ export enum ConfigType {
   inline = 'inline'
 }
 
-// Look for other parts of this extension here: $(Work_Folder)/_tasks/semanticReleaseAzureTask/...
+// Look for other parts of this extension here: $(Work_Folder)/_tasks/semanticReleaseFreestyleAzureTask/...
 
 async function run() {
   try {
     const configType: ConfigType = tl.getInput('configType', true) as ConfigType;
 
-    let semanticReleaseOption = {};
+    let semanticReleaseFreestyleOption = {};
 
     if (configType === ConfigType.filePath) {
       JSON.parse(fs.readFileSync(tl.getPathInput('configPath', true, true), 'utf8'));
     } else {
-      semanticReleaseOption = JSON.parse(tl.getInput('configMultiline', true));
+      semanticReleaseFreestyleOption = JSON.parse(tl.getInput('configMultiline', true));
     }
     const githubEndpoint = tl.getInput('gitHubServiceName', true);
     const githubEndpointToken = Utility.getGithubEndPointToken(githubEndpoint);
     process.env.GH_TOKEN = githubEndpointToken;
 
-    const result = await semanticRelease(
-      { ...semanticReleaseOption },
+    const result = await semanticReleaseFreestyle(
+      { ...semanticReleaseFreestyleOption },
       {
         // Run semantic-release from `/path/to/git/repo/root` without having to change local process `cwd` with `process.chdir()`
         cwd: tl.getInput('cwd'),

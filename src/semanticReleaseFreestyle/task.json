@@ -1,8 +1,8 @@
 {
     "id": "5380aecd-b378-4e53-a927-95d9e52d3b7f",
-    "name": "semanticReleaseAzureTask",
+    "name": "semanticReleaseFreestyleAzureTask",
     "friendlyName": "Semantic Release",
-    "description": "Task for simplifing Semantic Release",
+    "description": "Task for simplifying Semantic Release",
     "helpMarkDown": "",
     "category": "Utility",
     "author": "Daniel Habenicht",
@@ -19,7 +19,7 @@
             "displayName": "GitHub Credentials",
             "isExpanded": false
         },
-         {
+        {
             "name": "advanced",
             "displayName": "Advanced",
             "isExpanded": false
