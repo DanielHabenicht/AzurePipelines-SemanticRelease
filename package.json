@@ -5,12 +5,12 @@
     "scripts": {
         "test": "echo $GH_TOKEN",
         "build": "cd ./src/semanticRelease && npm install && tsc",
-        "pre-package": "rimraf dist && copyfiles -u 1 \"src{/*,}/{vss-extension.json,task.json,package.json,*.png,*.js,/!(tests)/*.js}\" dist -E && copyfiles README.md LICENSE dist -E && cd ./dist/semanticRelease && npm install --only=prod",
-        "package": "npm run build && npm run pre-package",
+        "pre-package": "npm run build && rimraf dist && copyfiles -u 1 \"src{/*,}/{vss-extension.json,task.json,package.json,*.png,*.js,/!(tests)/*.js}\" dist -E && copyfiles README.md LICENSE dist -E && cd ./dist/semanticRelease && npm install --only=prod",
+        "package": "npm run pre-package && cd ./dist && tfx extension create --manifest-globs vss-extension.json",
         "publish": "cd ./dist && cross-env-shell 'tfx extension publish --auth-type pat -t $MARKETPLACE_TOKEN --service-url \"https://marketplace.visualstudio.com/\" --share-with $SHARED_ORGS --manifest-globs vss-extension.json'",
         "release": "npm install && semantic-release",
         "release-dev": "semantic-release",
-        "azpipeline-tag": "cross-env-shell 'echo ##vso[build.addbuildtag]release'"     
+        "azpipeline-tag": "cross-env-shell 'echo ##vso[build.addbuildtag]release'"
     },
     "dependencies": {
         "@semantic-release/changelog": "3.0.4",
@@ -30,7 +30,7 @@
             [
                 "@semantic-release/exec",
                 {
-                    "prepareCmd": "node updateVersionNumbers.js ${nextRelease.version} && npm run package",
+                    "prepareCmd": "node updateVersionNumbers.js ${nextRelease.version} && npm run pre-package",
                     "publishCmd": "npm run publish && npm run azpipeline-tag"
                 }
             ],
