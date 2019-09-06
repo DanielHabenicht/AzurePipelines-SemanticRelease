@@ -2,7 +2,7 @@ import tl = require('azure-pipelines-task-lib/task');
 import tr = require('azure-pipelines-task-lib/toolrunner');
 import { Utility } from './utility/utility';
 const semanticRelease = require('semantic-release');
-const fs = require('fs');
+import * as fs from 'fs';
 import * as path from 'path';
 
 export enum ConfigType {
@@ -10,12 +10,12 @@ export enum ConfigType {
   inline = 'inline'
 }
 
-// Look for other parts of this extension here: $(Work_Folder)/_tasks/semanticReleaseFreestyleAzureTask/...
-
 async function run() {
   const localFolder = path.join(__dirname);
   console.log(`Skript Folder: ${localFolder}`);
-  console.log(`CWD: ${process.cwd}`);
+  console.log(`CWD: ${process.cwd()}`);
+
+  console.log(fs.readFileSync(path.join(__dirname, 'package.json')));
 
   const npm = new tr.ToolRunner('npm');
   npm.line('install');

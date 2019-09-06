@@ -1,7 +1,7 @@
 {
   "name": "semantic-release-azure-task",
   "version": "0.0.2",
-  "description": "",
+  "description": "Task for simplifying Semantic Release",
   "main": "index.js",
   "scripts": {
     "start": "env-cmd nodemon --inspect",
@@ -37,7 +37,7 @@
   },
   "devDependencies": {
     "@types/mocha": "5.2.7",
-    "@types/node": "12.7.4",
+    "@types/node": "^12.7.4",
     "@types/q": "1.5.2",
     "@types/shelljs": "0.8.5",
     "env-cmd": "10.0.1",
