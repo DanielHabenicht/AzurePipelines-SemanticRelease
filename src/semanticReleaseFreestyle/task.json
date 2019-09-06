@@ -1,10 +1,18 @@
 {
     "id": "5380aecd-b378-4e53-a927-95d9e52d3b7f",
-    "name": "semanticReleaseFreestyleAzureTask",
-    "friendlyName": "Semantic Release",
+    "name": "semanticReleaseFreestyle",
+    "friendlyName": "Semantic Release Freestyle",
     "description": "Task for simplifying Semantic Release",
     "helpMarkDown": "",
     "category": "Utility",
+    "visibility": [
+        "Build",
+        "Release"
+    ],
+    "runsOn": [
+        "Agent",
+        "DeploymentGroup"
+    ],
     "author": "Daniel Habenicht",
     "version": {
         "Major": 0,
