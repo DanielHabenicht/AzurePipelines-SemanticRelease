@@ -1,22 +1,17 @@
 {
-    "version": "0.2.0",
-    "configurations": [
-        {
-            "name": "Debug",
-            "type": "node",
-            "request": "launch",
-            "args": [
-                "${workspaceRoot}/src/semanticReleaseFreestyle/index.ts"
-            ],
-            "runtimeArgs": [
-                "--nolazy",
-                "-r",
-                "ts-node/register"
-            ],
-            "envFile": "${workspaceRoot}/src/semanticReleaseFreestyle/.env",
-            "sourceMaps": true,
-            "cwd": "${workspaceRoot}/src/semanticReleaseFreestyle",
-            "protocol": "inspector",
-        },
-    ]
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug",
+      "type": "node",
+      "request": "launch",
+      "args": ["${workspaceRoot}/src/semanticReleaseFreestyle/index.ts"],
+      "runtimeArgs": ["--nolazy", "-r", "ts-node/register"],
+      "envFile": "${workspaceRoot}/src/semanticReleaseFreestyle/.env",
+      //   "sourceMaps": true,
+      "cwd": "${workspaceRoot}/src/semanticReleaseFreestyle",
+      "protocol": "inspector",
+      "env": { "TS_NODE_FILES": "true" }
+    }
+  ]
 }

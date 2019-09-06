@@ -24,4 +24,6 @@ export class Utility {
 
     return githubEndpointToken;
   }
+
+  public static getNpmPackagesFromConfig(config: any) {}
 }

@@ -1,7 +1,7 @@
 import tl = require('azure-pipelines-task-lib/task');
 import tr = require('azure-pipelines-task-lib/toolrunner');
 import { Utility } from './utility/utility';
-const semanticRelease = require('semantic-release');
+import semanticRelease, { GlobalConfig } from 'semantic-release';
 import * as fs from 'fs';
 import * as path from 'path';
 
@@ -15,7 +15,7 @@ async function run() {
   console.log(`Skript Folder: ${localFolder}`);
   console.log(`CWD: ${process.cwd()}`);
 
-  console.log(fs.readFileSync(path.join(__dirname, 'package.json')));
+  console.log(JSON.parse(fs.readFileSync(path.join(__dirname, 'package.json'), 'utf8')));
 
   const npm = new tr.ToolRunner('npm');
   npm.line('install');
@@ -28,7 +28,7 @@ async function runSemanticRelease() {
   try {
     const configType: ConfigType = tl.getInput('configType', true) as ConfigType;
 
-    let semanticReleaseFreestyleOption = {};
+    let semanticReleaseFreestyleOption: Partial<GlobalConfig> = {};
 
     if (configType === ConfigType.filePath) {
       JSON.parse(fs.readFileSync(tl.getPathInput('configPath', true, true), 'utf8'));
@@ -37,6 +37,7 @@ async function runSemanticRelease() {
     }
     const githubEndpoint = tl.getInput('gitHubServiceName', true);
     const githubEndpointToken = Utility.getGithubEndPointToken(githubEndpoint);
+    // const githubEndpointToken = '245345345gdfgdfg';
 
     const result = await semanticRelease(
       { ...semanticReleaseFreestyleOption },
