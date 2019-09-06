@@ -36,14 +36,14 @@
     "semantic-release-docker-test": "^1.0.2"
   },
   "devDependencies": {
-    "@types/mocha": "^5.2.7",
-    "@types/node": "^12.7.3",
-    "@types/q": "^1.5.2",
-    "@types/shelljs": "^0.8.5",
-    "env-cmd": "^10.0.1",
-    "mocha": "^6.2.0",
-    "nodemon": "^1.19.1",
-    "ts-node": "^8.3.0",
-    "typescript": "^3.6.2"
+    "@types/mocha": "5.2.7",
+    "@types/node": "12.7.3",
+    "@types/q": "1.5.2",
+    "@types/shelljs": "0.8.5",
+    "env-cmd": "10.0.1",
+    "mocha": "6.2.0",
+    "nodemon": "1.19.1",
+    "ts-node": "8.3.0",
+    "typescript": "3.6.2"
   }
 }
