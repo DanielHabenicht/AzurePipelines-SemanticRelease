@@ -2,7 +2,7 @@
     "id": "5380aecd-b378-4e53-a927-95d9e52d3b7f",
     "name": "semanticReleaseFreestyle",
     "friendlyName": "Semantic Release Freestyle",
-    "description": "Task for simplifying Semantic Release",
+    "description": "Task for simplifying Semantic Release (${version})",
     "helpMarkDown": "",
     "category": "Utility",
     "visibility": [

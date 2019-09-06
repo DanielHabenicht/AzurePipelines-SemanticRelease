@@ -22,7 +22,8 @@ fs.writeFileSync(
   task
     .replace(/("Major": )(\d*)/g, `$1${version.split('.')[0]}`)
     .replace(/("Minor": )(\d*)/g, `$1${version.split('.')[1]}`)
-    .replace(/("Patch": )(\d*)/g, `$1${version.split('.')[2]}`),
+    .replace(/("Patch": )(\d*)/g, `$1${version.split('.')[2]}`)
+    .replace(/\$\{version\}/g, version),
   { encoding: 'utf-8' }
 );
 
