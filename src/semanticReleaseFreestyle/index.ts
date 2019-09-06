@@ -15,24 +15,17 @@ async function run() {
   console.log(`Skript Folder: ${localFolder}`);
   console.log(`CWD: ${process.cwd()}`);
 
-  console.log(JSON.parse(fs.readFileSync(path.join(__dirname, 'package.json'), 'utf8')));
-
   const npm = new tr.ToolRunner('npm');
   npm.line('install');
+  console.log(`Skript Folder: ${localFolder}`);
   npm
     .exec({
-      cwd: localFolder,
-      failOnStdErr: true,
-      ignoreReturnCode: false,
-      env: {},
-      silent: false,
-      windowsVerbatimArguments: false,
-      outStream: process.stdout,
-      errStream: process.stdout
-    })
+      cwd: localFolder
+    } as any)
     .then(async () => {
       await runSemanticRelease();
     });
+  console.log(`Skript Folder: ${localFolder}`);
 }
 
 async function runSemanticRelease() {

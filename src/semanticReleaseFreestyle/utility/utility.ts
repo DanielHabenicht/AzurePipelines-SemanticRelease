@@ -1,4 +1,6 @@
 import tl = require('azure-pipelines-task-lib/task');
+import { GlobalConfig } from 'semantic-release';
+import { type } from 'os';
 
 export class Utility {
   public static getGithubEndPointToken(githubEndpoint: string): string {
@@ -25,5 +27,24 @@ export class Utility {
     return githubEndpointToken;
   }
 
-  public static getNpmPackagesFromConfig(config: any) {}
+  /**
+   * Returns all packages used un the release config.
+   * @param config The Semantic Release Config
+   */
+  public static getNpmPackagesFromConfig(config: GlobalConfig): string[] {
+    const packages: string[] = [];
+
+    if (!config.plugins) {
+      return [];
+    }
+
+    config.plugins.forEach(plugin => {
+      if (typeof plugin === 'string') {
+        packages.push(plugin);
+      } else {
+        packages.push(plugin[0]);
+      }
+    });
+    return packages;
+  }
 }

@@ -6,7 +6,7 @@
   "scripts": {
     "start": "env-cmd nodemon --inspect",
     "build": "tsc && cd .. && tfx extension create --manifest-globs vss-extension.json",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "tsc && mocha tests/_suite.js"
   },
   "repository": {
     "type": "git",
@@ -36,10 +36,12 @@
     "semantic-release-docker-test": "^1.0.2"
   },
   "devDependencies": {
+    "@types/chai": "^4.2.1",
     "@types/mocha": "5.2.7",
     "@types/node": "^12.7.4",
     "@types/q": "1.5.2",
     "@types/shelljs": "0.8.5",
+    "chai": "^4.2.0",
     "env-cmd": "10.0.1",
     "mocha": "6.2.0",
     "nodemon": "1.19.2",

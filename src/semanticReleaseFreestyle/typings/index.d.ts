@@ -10,18 +10,62 @@ declare module 'semantic-release' {
    * The semantic release configuration itself.
    */
   export interface GlobalConfig {
-    verifyConfig?: any;
-    verifyConditions?: any;
-    /** The full prepare step configuration. */
+    /**
+     * The branch on which releases should happen.
+     **/
+    branch?: string;
+    /**
+     * The Git repository URL, in any supported format.
+     **/
+    repositoryUrl?: string;
+    /**
+     *  The Git tag format used by semantic-release to identify releases.
+     **/
+    tagFormat?: string;
+    /**
+     * The plugins that will be executed by semantic release
+     */
+    plugins?: (string | [string] | [string, any])[];
+    /**
+     * A Semantic Release Configuration to extend from
+     */
+    extends?: string;
+    /**
+     * Verify Config Steps
+     * This will override any step defined by plugins.
+     * @deprecated
+     */
+    verifyConfig?: any[];
+    /**
+     * Verify Conditions Steps
+     * @deprecated
+     */
+    verifyConditions?: any[];
+    /**
+     * The full prepare step configuration.
+     * @deprecated
+     **/
     prepare?: any;
+    /**
+     * @deprecated
+     */
+    publish?: any;
+    /**
+     * @deprecated
+     */
+    fail?: any;
+    /**
+     * @deprecated
+     */
+    success?: any;
+  }
 
-    /** The branch on which releases should happen. */
-    branch: string;
-    /** The Git repository URL, in any supported format. */
-    repositoryUrl: string;
-    /** The Git tag format used by semantic-release to identify releases. */
-    tagFormat: string;
-    plugins: any[];
+  /**
+   * The Basic Configuration of a Plugin
+   */
+  export interface PluginConfig {
+    path: string;
+    [key: string]: string;
   }
 
   export interface LastRelease {
