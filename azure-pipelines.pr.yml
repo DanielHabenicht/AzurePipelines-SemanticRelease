@@ -9,5 +9,8 @@ pool:
 
 steps:
 - script: |
+    npm install
+  displayName: "Install"
+- script: |
     npm run package
   displayName: "Build"
