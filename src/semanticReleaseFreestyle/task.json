@@ -28,6 +28,21 @@
             "isExpanded": false
         },
         {
+            "name": "npm",
+            "displayName": "NPM Credentials",
+            "isExpanded": false
+        },
+        {
+            "name": "docker",
+            "displayName": "Docker Credentials",
+            "isExpanded": false
+        },
+        {
+            "name": "generic",
+            "displayName": "Generic Credentials",
+            "isExpanded": false
+        },
+        {
             "name": "advanced",
             "displayName": "Advanced",
             "isExpanded": false
@@ -38,17 +53,40 @@
             "name": "gitHubServiceName",
             "type": "connectedService:github:OAuth,PersonalAccessToken",
             "label": "GitHub connection (OAuth or PAT)",
-            "required": true,
+            "required": false,
             "helpMarkDown": "Specify the name of the GitHub service connection to use to connect to the GitHub repository. The connection must be based on a GitHub user's OAuth or a GitHub personal access token. Learn more about service connections [here](https://aka.ms/AA3am5s).",
             "groupName": "github"
         },
         {
-            "name": "genericServiceName",
-            "type": "connectedService:generic",
-            "label": "Generic Connection for GitHub",
+            "name": "npmServiceName",
+            "type": "connectedService:externalnpmregistry",
+            "label": "NPM Registry",
             "required": false,
-            "helpMarkDown": "Specify the name of the GitHub service connection to use to connect to the GitHub repository. The connection must be based on a GitHub user's OAuth or a GitHub personal access token. Learn more about service connections [here](https://aka.ms/AA3am5s).",
-            "groupName": "github"
+            "helpMarkDown": "Credentials to use for publishing to an external registry.",
+            "groupName": "npm"
+        },
+        {
+            "name": "dockerServiceName",
+            "type": "connectedService:dockerregistry",
+            "label": "Container Registry",
+            "required": false,
+            "helpMarkDown": "Select a Docker registry service connection. Required for commands that need to authenticate with a registry.",
+            "groupName": "docker"
+        },
+        {
+            "name": "genericServiceEnv",
+            "type": "string",
+            "label": "Environment Variable for Generic Connection 1",
+            "helpMarkDown": "The Credentials from Service Connection 1 will be available to semantic release under this Environment Variable",
+            "groupName": "generic"
+        },
+        {
+            "name": "genericServiceConnection",
+            "type": "connectedService:generic",
+            "label": "Generic Connection 1",
+            "required": false,
+            "helpMarkDown": "Generic Service Connection for any credentials.",
+            "groupName": "generic"
         },
         {
             "name": "configType",
