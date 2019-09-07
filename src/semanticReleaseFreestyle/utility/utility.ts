@@ -85,4 +85,24 @@ export class Utility {
       return JSON.parse(tl.getInput('configMultiline', true));
     }
   }
+
+  public static getCredentials(): { [key: string]: string } {
+    let env: any = {};
+
+    // Docker
+    let dockerServiceConnectionId = tl.getInput('dockerServiceConnection');
+    if (dockerServiceConnectionId) {
+      const registryAuth = tl.getEndpointAuthorization(dockerServiceConnectionId, false).parameters;
+      env.DOCKER_PASSWORD = registryAuth['password'];
+      env.DOCKER_USERNAME = registryAuth['username'];
+    }
+
+    // GitHub
+    const gitHubServiceConnectionId = tl.getInput('gitHubServiceConnection');
+    if (gitHubServiceConnectionId) {
+      env.GH_TOKEN = Utility.getGithubEndPointToken(gitHubServiceConnectionId);
+    }
+
+    return env;
+  }
 }

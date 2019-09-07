@@ -23,17 +23,13 @@ async function run() {
 
 async function runSemanticRelease(config: GlobalConfig) {
   try {
-    const githubEndpoint = tl.getInput('gitHubServiceName', true);
-    // const githubEndpointToken = Utility.getGithubEndPointToken(githubEndpoint);
-    const githubEndpointToken = '245345345gdfgdfg';
-
     const result = await semanticRelease(
       { ...config },
       {
         // Run semantic-release from `/path/to/git/repo/root` without having to change local process `cwd` with `process.chdir()`
         cwd: tl.getInput('cwd'),
         // Pass the variable `MY_ENV_VAR` to semantic-release without having to modify the local `process.env`
-        env: { ...process.env, GH_TOKEN: githubEndpointToken },
+        env: { ...process.env, ...Utility.getCredentials() },
         stdout: process.stdout,
         stderr: process.stderr
       }
