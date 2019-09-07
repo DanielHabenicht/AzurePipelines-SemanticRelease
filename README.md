@@ -1,3 +1,6 @@
+[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
+[![Renovate enabled](https://img.shields.io/badge/renovate-enabled-brightgreen.svg)](https://renovatebot.com/)
+
 # Semantic Release Task for Azure Pipelines
 
 > This is under development and may not work as expected. Please do not use for production till 1.0 release.
