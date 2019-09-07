@@ -27,13 +27,8 @@
   },
   "homepage": "https://github.com/DanielHabenicht/AzurePipelines-SemanticRelease#readme",
   "dependencies": {
-    "@semantic-release/changelog": "^3.0.4",
-    "@semantic-release/exec": "^3.3.6",
-    "@semantic-release/github": "^5.4.3",
-    "@semantic-release/release-notes-generator": "^7.3.0",
     "azure-pipelines-task-lib": "^2.8.0",
-    "semantic-release": "^15.13.24",
-    "semantic-release-docker-test": "^1.0.2"
+    "semantic-release": "^15.13.24"
   },
   "devDependencies": {
     "@types/chai": "^4.2.1",

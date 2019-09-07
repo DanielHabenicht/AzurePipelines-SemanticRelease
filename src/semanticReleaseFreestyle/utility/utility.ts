@@ -1,6 +1,12 @@
 import tl = require('azure-pipelines-task-lib/task');
 import { GlobalConfig } from 'semantic-release';
 import { type } from 'os';
+import * as fs from 'fs';
+
+export enum ConfigType {
+  filePath = 'filePath',
+  inline = 'inline'
+}
 
 export class Utility {
   public static getGithubEndPointToken(githubEndpoint: string): string {
@@ -40,11 +46,43 @@ export class Utility {
 
     config.plugins.forEach(plugin => {
       if (typeof plugin === 'string') {
-        packages.push(plugin);
+        Utility.addIfNotExist(packages, plugin);
       } else {
-        packages.push(plugin[0]);
+        Utility.addIfNotExist(packages, plugin[0]);
       }
     });
+
+    const steps = ['verifyConditions', 'verifyConfig', 'prepare', 'publish', 'fail', 'success'];
+
+    const plugins: (string | { path: string })[] = [];
+    steps.forEach(step => {
+      plugins.push(...(config as any)[step]);
+    });
+
+    plugins.forEach(plugin => {
+      if (typeof plugin === 'string') {
+        Utility.addIfNotExist(packages, plugin);
+      } else {
+        Utility.addIfNotExist(packages, plugin.path);
+      }
+    });
+
     return packages;
+  }
+
+  public static addIfNotExist(array: string[], add: string): void {
+    if (!array.includes(add)) {
+      array.push(add);
+    }
+  }
+
+  public static getConfig(): GlobalConfig {
+    const configType: ConfigType = tl.getInput('configType', true) as ConfigType;
+
+    if (configType === ConfigType.filePath) {
+      return JSON.parse(fs.readFileSync(tl.getPathInput('configPath', true, true), 'utf8'));
+    } else {
+      return JSON.parse(tl.getInput('configMultiline', true));
+    }
   }
 }

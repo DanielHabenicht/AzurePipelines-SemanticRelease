@@ -6,5 +6,8 @@
     "ignore": [
         "tests"
     ],
-    "exec": "ts-node ./index.ts"
+    "exec": "ts-node ./index.ts",
+    "env": {
+        "TS_NODE_FILES": "true"
+    }
 }

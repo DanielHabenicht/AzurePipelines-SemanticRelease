@@ -2,49 +2,33 @@ import tl = require('azure-pipelines-task-lib/task');
 import tr = require('azure-pipelines-task-lib/toolrunner');
 import { Utility } from './utility/utility';
 import semanticRelease, { GlobalConfig } from 'semantic-release';
-import * as fs from 'fs';
 import * as path from 'path';
-
-export enum ConfigType {
-  filePath = 'filePath',
-  inline = 'inline'
-}
 
 async function run() {
   const localFolder = path.join(__dirname);
-  console.log(`Skript Folder: ${localFolder}`);
-  console.log(`CWD: ${process.cwd()}`);
 
+  const config = Utility.getConfig();
+
+  tl.debug(`Executing NPM Command in: ${localFolder}`);
   const npm = new tr.ToolRunner('npm');
-  npm.line('install');
-  console.log(`Skript Folder: ${localFolder}`);
+  npm.line(`install --only=prod ${Utility.getNpmPackagesFromConfig(config).join(' ')}`);
   npm
     .exec({
       cwd: localFolder
     } as any)
     .then(async () => {
-      await runSemanticRelease();
+      await runSemanticRelease(config);
     });
-  console.log(`Skript Folder: ${localFolder}`);
 }
 
-async function runSemanticRelease() {
+async function runSemanticRelease(config: GlobalConfig) {
   try {
-    const configType: ConfigType = tl.getInput('configType', true) as ConfigType;
-
-    let semanticReleaseFreestyleOption: Partial<GlobalConfig> = {};
-
-    if (configType === ConfigType.filePath) {
-      JSON.parse(fs.readFileSync(tl.getPathInput('configPath', true, true), 'utf8'));
-    } else {
-      semanticReleaseFreestyleOption = JSON.parse(tl.getInput('configMultiline', true));
-    }
     const githubEndpoint = tl.getInput('gitHubServiceName', true);
-    const githubEndpointToken = Utility.getGithubEndPointToken(githubEndpoint);
-    // const githubEndpointToken = '245345345gdfgdfg';
+    // const githubEndpointToken = Utility.getGithubEndPointToken(githubEndpoint);
+    const githubEndpointToken = '245345345gdfgdfg';
 
     const result = await semanticRelease(
-      { ...semanticReleaseFreestyleOption },
+      { ...config },
       {
         // Run semantic-release from `/path/to/git/repo/root` without having to change local process `cwd` with `process.chdir()`
         cwd: tl.getInput('cwd'),
