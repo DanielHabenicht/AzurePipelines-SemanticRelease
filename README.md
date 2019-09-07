@@ -4,6 +4,11 @@
 
 This is a Azure DevOps Extension that supplies you with multiple Azure Piplines Tasks that make your release much easier.
 
+## How to use
+
+Just add the task to your Pipeline.
+> Add Usage
+
 It is utilizing [semantic-release](https://github.com/semantic-release/semantic-release). You can either use predefined tasks or hack it your way with the freestyle task. 
 
 Provide multiple Tasks:
@@ -15,3 +20,13 @@ Provide multiple Tasks:
 - Create an issue to add your idea.
 
 More to come soon!
+
+
+## Contribution
+
+> Add Guide
+
+## License
+MIT
+
+Made possible by the great [semantic-release](https://github.com/semantic-release/semantic-release) package.
