@@ -5,11 +5,11 @@
       "name": "Debug",
       "type": "node",
       "request": "launch",
-      "args": ["${workspaceRoot}/src/semanticReleaseFreestyle/index.ts"],
+      "args": ["${workspaceRoot}/src/freestyle/index.ts"],
       "runtimeArgs": ["--nolazy", "-r", "ts-node/register"],
-      "envFile": "${workspaceRoot}/src/semanticReleaseFreestyle/.env",
+      "envFile": "${workspaceRoot}/src/freestyle/.env",
       //   "sourceMaps": true,
-      "cwd": "${workspaceRoot}/src/semanticReleaseFreestyle",
+      "cwd": "${workspaceRoot}/src/freestyle",
       "protocol": "inspector",
       "env": { "TS_NODE_FILES": "true" }
     }

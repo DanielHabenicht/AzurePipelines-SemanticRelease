@@ -1,6 +1,6 @@
 {
-    "id": "87a45e6c-a243-455c-861d-37404e26212d",
-    "name": "semanticReleaseFreestyle",
+    "id": "ba368a96-ea38-4931-a81e-02ff66133403",
+    "name": "freestyle",
     "friendlyName": "Semantic Release Freestyle",
     "description": "Task for simplifying Semantic Release (${version})",
     "helpMarkDown": "",

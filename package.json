@@ -4,8 +4,8 @@
     "description": "This package is just for releasing the extension",
     "scripts": {
         "test": "echo $GH_TOKEN",
-        "build": "cd ./src/semanticReleaseFreestyle && npm install && tsc",
-        "pre-package": "npm run build && rimraf dist && copyfiles -u 1 \"src{/*,}/{vss-extension.json,task.json,package.json,*.png,*.js,/!(tests)/*.js}\" dist -E && copyfiles README.md LICENSE dist -E && cd ./dist/semanticReleaseFreestyle && npm install --only=prod",
+        "build": "cd ./src/freestyle && npm install && tsc",
+        "pre-package": "npm run build && rimraf dist && copyfiles -u 1 \"src{/*,}/{vss-extension.json,task.json,package.json,*.png,*.js,/!(tests)/*.js}\" dist -E && copyfiles README.md LICENSE dist -E && cd ./dist/freestyle && npm install --only=prod",
         "package": "npm run pre-package && cd ./dist && tfx extension create --manifest-globs vss-extension.json",
         "publish": "cd ./dist && cross-env-shell 'tfx extension publish --auth-type pat -t $MARKETPLACE_TOKEN --service-url \"https://marketplace.visualstudio.com/\" --manifest-globs vss-extension.json'",
         "release": "npm install && semantic-release",
