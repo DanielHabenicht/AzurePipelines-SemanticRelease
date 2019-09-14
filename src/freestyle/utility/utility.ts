@@ -56,7 +56,9 @@ export class Utility {
 
     const plugins: (string | { path: string })[] = [];
     steps.forEach(step => {
-      plugins.push(...(config as any)[step]);
+      if((config as any)[step] != undefined){
+        plugins.push(...(config as any)[step]);
+      }
     });
 
     plugins.forEach(plugin => {
