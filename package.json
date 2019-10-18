@@ -19,7 +19,7 @@
         "copyfiles": "2.1.1",
         "cross-env": "5.2.1",
         "rimraf": "3.0.0",
-        "semantic-release": "15.13.24",
+        "semantic-release": "15.13.27",
         "tfx-cli": "0.7.9"
     },
     "release": {
