@@ -13,13 +13,13 @@
         "azpipeline-tag": "cross-env-shell 'echo ##vso[build.addbuildtag]release'"
     },
     "dependencies": {
-        "@semantic-release/changelog": "3.0.4",
-        "@semantic-release/exec": "3.3.7",
-        "@semantic-release/git": "7.0.16",
+        "@semantic-release/changelog": "3.0.5",
+        "@semantic-release/exec": "3.3.8",
+        "@semantic-release/git": "7.0.17",
         "copyfiles": "2.1.1",
         "cross-env": "5.2.1",
         "rimraf": "3.0.0",
-        "semantic-release": "15.13.27",
+        "semantic-release": "15.13.28",
         "tfx-cli": "0.7.9"
     },
     "release": {
