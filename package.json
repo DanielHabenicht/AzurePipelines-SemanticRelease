@@ -17,7 +17,7 @@
         "@semantic-release/exec": "3.3.8",
         "@semantic-release/git": "7.0.18",
         "copyfiles": "2.1.1",
-        "cross-env": "5.2.1",
+        "cross-env": "6.0.3",
         "rimraf": "3.0.0",
         "semantic-release": "15.13.31",
         "tfx-cli": "0.7.11"
