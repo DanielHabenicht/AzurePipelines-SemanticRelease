@@ -107,7 +107,7 @@
             "label": "Config Path",
             "defaultValue": "",
             "required": true,
-            "visibleRule": "configType = filePath && configType = package",
+            "visibleRule": "configType = filePath || configType = package",
             "helpMarkDown": "Relative path from repo root of the config file."
         },
         {
