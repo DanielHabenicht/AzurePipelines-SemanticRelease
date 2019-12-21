@@ -1,8 +1,8 @@
 import tl = require('azure-pipelines-task-lib/task');
 import tr = require('azure-pipelines-task-lib/toolrunner');
-import { Utility } from './utility/utility';
-import semanticRelease, { GlobalConfig } from 'semantic-release';
 import * as path from 'path';
+import semanticRelease, { GlobalConfig } from 'semantic-release';
+import { Utility } from './utility/utility';
 
 async function run() {
   const localFolder = path.join(__dirname);
@@ -24,7 +24,7 @@ async function run() {
 async function runSemanticRelease(config: GlobalConfig) {
   try {
     const result = await semanticRelease(
-      { ...config },
+      { ...Utility.removeVersionFromConfig(config) },
       {
         // Run semantic-release from `/path/to/git/repo/root` without having to change local process `cwd` with `process.chdir()`
         cwd: tl.getInput('cwd'),

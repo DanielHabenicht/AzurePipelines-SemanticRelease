@@ -1,11 +1,11 @@
 import tl = require('azure-pipelines-task-lib/task');
-import { GlobalConfig } from 'semantic-release';
-import { type } from 'os';
 import * as fs from 'fs';
+import { GlobalConfig } from 'semantic-release';
 
 export enum ConfigType {
   filePath = 'filePath',
-  inline = 'inline'
+  inline = 'inline',
+  package = 'package'
 }
 
 export class Utility {
@@ -34,7 +34,7 @@ export class Utility {
   }
 
   /**
-   * Returns all packages used un the release config.
+   * Returns all packages used in the release config.
    * @param config The Semantic Release Config
    */
   public static getNpmPackagesFromConfig(config: GlobalConfig): string[] {
@@ -44,6 +44,7 @@ export class Utility {
       return [];
     }
 
+    // Get the packages used in the plugins section of the config
     config.plugins.forEach(plugin => {
       if (typeof plugin === 'string') {
         Utility.addIfNotExist(packages, plugin);
@@ -52,15 +53,16 @@ export class Utility {
       }
     });
 
+    // Get the config of all individual steps used in the different steps (for old release-configs)
     const steps = ['verifyConditions', 'verifyConfig', 'prepare', 'publish', 'fail', 'success'];
-
     const plugins: (string | { path: string })[] = [];
     steps.forEach(step => {
-      if((config as any)[step] != undefined){
+      if ((config as any)[step] != undefined) {
         plugins.push(...(config as any)[step]);
       }
     });
 
+    // Get the packages used in the steps
     plugins.forEach(plugin => {
       if (typeof plugin === 'string') {
         Utility.addIfNotExist(packages, plugin);
@@ -72,6 +74,49 @@ export class Utility {
     return packages;
   }
 
+  public static getPackageNameWithoutVersion(str: string): string {
+    const match = /(.{1}.*)@/gm.exec(str);
+    if (match) {
+      return match[1];
+    } else {
+      return str;
+    }
+  }
+
+  /**
+   * Returns all packages used in the release config.
+   * @param config The Semantic Release Config
+   */
+  public static removeVersionFromConfig(config: GlobalConfig): GlobalConfig {
+    if (config.plugins != undefined) {
+      // Get the packages used in the plugins section of the config
+      config.plugins.forEach((plugin, index) => {
+        if (typeof plugin === 'string') {
+          // Because typescript cannot count one and one together...
+          (config.plugins![index] as any) = Utility.getPackageNameWithoutVersion(plugin);
+        } else if (Array.isArray(plugin)) {
+          (config.plugins![index][0] as any) = Utility.getPackageNameWithoutVersion(plugin[0]);
+        }
+      });
+    }
+
+    // Get the config of all individual steps used in the different steps (for old release-configs)
+    const steps = ['verifyConditions', 'verifyConfig', 'prepare', 'publish', 'fail', 'success'] as const;
+    steps.forEach(step => {
+      if (config[step] != undefined) {
+        config[step]!.forEach((plugin, index) => {
+          if (typeof plugin === 'string') {
+            config[step]![index] = Utility.getPackageNameWithoutVersion(plugin);
+          } else {
+            (config[step]![index] as any).path = Utility.getPackageNameWithoutVersion(plugin.path);
+          }
+        });
+      }
+    });
+
+    return config;
+  }
+
   public static addIfNotExist(array: string[], add: string): void {
     if (!array.includes(add)) {
       array.push(add);
@@ -81,10 +126,16 @@ export class Utility {
   public static getConfig(): GlobalConfig {
     const configType: ConfigType = tl.getInput('configType', true) as ConfigType;
 
-    if (configType === ConfigType.filePath) {
-      return JSON.parse(fs.readFileSync(tl.getPathInput('configPath', true, true), 'utf8'));
-    } else {
-      return JSON.parse(tl.getInput('configMultiline', true));
+    switch (configType) {
+      case ConfigType.filePath: {
+        return JSON.parse(fs.readFileSync(tl.getPathInput('configPath', true, true), 'utf8'));
+      }
+      case ConfigType.inline: {
+        return JSON.parse(tl.getInput('configMultiline', true));
+      }
+      case ConfigType.package: {
+        return JSON.parse(fs.readFileSync(tl.getPathInput('configPath', true, true), 'utf8')).release;
+      }
     }
   }
 
