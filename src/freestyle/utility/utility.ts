@@ -126,10 +126,16 @@ export class Utility {
   public static getConfig(): GlobalConfig {
     const configType: ConfigType = tl.getInput('configType', true) as ConfigType;
 
-    if (configType === ConfigType.filePath) {
-      return JSON.parse(fs.readFileSync(tl.getPathInput('configPath', true, true), 'utf8'));
-    } else {
-      return JSON.parse(tl.getInput('configMultiline', true));
+    switch (configType) {
+      case ConfigType.filePath: {
+        return JSON.parse(fs.readFileSync(tl.getPathInput('configPath', true, true), 'utf8'));
+      }
+      case ConfigType.inline: {
+        return JSON.parse(tl.getInput('configMultiline', true));
+      }
+      case ConfigType.package: {
+        return JSON.parse(fs.readFileSync(tl.getPathInput('configPath', true, true), 'utf8')).release;
+      }
     }
   }
 
