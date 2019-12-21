@@ -25,7 +25,7 @@ declare module 'semantic-release' {
     /**
      * The plugins that will be executed by semantic release
      */
-    plugins?: (string | [string] | [string, any])[];
+    plugins?: (string | [string] | [string | any])[];
     /**
      * A Semantic Release Configuration to extend from
      */
@@ -35,29 +35,29 @@ declare module 'semantic-release' {
      * This will override any step defined by plugins.
      * @deprecated
      */
-    verifyConfig?: any[];
+    verifyConfig?: (PluginConfig | string)[];
     /**
      * Verify Conditions Steps
      * @deprecated
      */
-    verifyConditions?: any[];
+    verifyConditions?: (PluginConfig | string)[];
     /**
      * The full prepare step configuration.
      * @deprecated
      **/
-    prepare?: any;
+    prepare?: (PluginConfig | string)[];
     /**
      * @deprecated
      */
-    publish?: any;
+    publish?: (PluginConfig | string)[];
     /**
      * @deprecated
      */
-    fail?: any;
+    fail?: (PluginConfig | string)[];
     /**
      * @deprecated
      */
-    success?: any;
+    success?: (PluginConfig | string)[];
   }
 
   /**
@@ -65,7 +65,7 @@ declare module 'semantic-release' {
    */
   export interface PluginConfig {
     path: string;
-    [key: string]: string;
+    [key: string]: any;
   }
 
   export interface LastRelease {

@@ -5,9 +5,19 @@
 
 > This is under development and may not work as expected. Please do not use for production till 1.0 release.
 
-This is a Azure DevOps Extension that supplies you with multiple Azure Piplines Tasks that make your release much easier.
+This is a Azure DevOps Extension that supplies you with multiple Azure Pipelines Tasks that make your release much easier.
 
 ## How to use
+
+There are multiple ways to use the Extension. 
+
+### The Freestyle Task
+
+   1. You can load the release config from three different location:
+      1. File Path: The path to your `releaserc.json` or any other `json` file.
+      2. Inline: An inline `json` formatted release config.
+      3. Package.json: The path to your `package.json` with a release property.
+   2. Credentials...
 
 Just add the task to your Pipeline.
 > Add Usage

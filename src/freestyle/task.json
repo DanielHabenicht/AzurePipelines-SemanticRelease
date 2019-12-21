@@ -97,7 +97,8 @@
             "helpMarkDown": "Arguments passed to the shell script",
             "options": {
                 "filePath": "File Path",
-                "inline": "Inline"
+                "inline": "Inline",
+                "package": "Package.json"
             }
         },
         {
@@ -106,7 +107,7 @@
             "label": "Config Path",
             "defaultValue": "",
             "required": true,
-            "visibleRule": "configType = filePath",
+            "visibleRule": "configType = filePath && configType = package",
             "helpMarkDown": "Relative path from repo root of the config file."
         },
         {

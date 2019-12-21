@@ -1,9 +1,6 @@
-import * as assert from 'assert';
-import * as ttm from 'azure-pipelines-task-lib/mock-test';
-import * as path from 'path';
-import { Utility } from '../utility/utility';
-import { GlobalConfig } from 'semantic-release';
 import { expect } from 'chai';
+import { GlobalConfig } from 'semantic-release';
+import { Utility } from '../utility/utility';
 
 const testConfig: GlobalConfig = {
   branch: 'master',
@@ -38,6 +35,84 @@ const testConfig: GlobalConfig = {
   success: ['@semantic-release/github'],
   plugins: [['@semantic-release/commit-analyzer'], '@semantic-release/release-notes-generator']
 };
+
+describe('Remove version from packages', function() {
+  it('test single function', () => {
+    expect(Utility.getPackageNameWithoutVersion('@semantic-release/commit-analyzer@6.3.0')).to.equal(
+      '@semantic-release/commit-analyzer'
+    );
+  });
+
+  it('test config', () => {
+    expect(
+      Utility.removeVersionFromConfig({
+        branch: 'master',
+        verifyConditions: ['@semantic-release/changelog@6.3.0', '@semantic-release/github@6.3.0'],
+        verifyConfig: ['@semantic-release/github@6.3.0'],
+        prepare: [
+          {
+            path: '@semantic-release/changelog@6.3.0',
+            changelogFile: 'src/changelog.md'
+          }
+        ],
+        publish: [
+          {
+            path: '@semantic-release/exec@6.3.0',
+            cmd: 'echo ##vso[build.updatebuildnumber]${nextRelease.version}'
+          },
+          {
+            path: '@semantic-release/exec@6.3.0',
+            cmd: 'echo ##vso[build.addbuildtag]release'
+          },
+          {
+            path: '@semantic-release/github@6.3.0',
+            assets: [
+              {
+                path: 'src/changelog.md',
+                label: 'Changelog'
+              }
+            ]
+          }
+        ],
+        fail: ['@semantic-release/github@6.3.0'],
+        success: ['@semantic-release/github@6.3.0'],
+        plugins: [['@semantic-release/commit-analyzer@6.3.0'], '@semantic-release/release-notes-generator@6.3.0']
+      })
+    ).to.deep.equal({
+      branch: 'master',
+      verifyConditions: ['@semantic-release/changelog', '@semantic-release/github'],
+      verifyConfig: ['@semantic-release/github'],
+      prepare: [
+        {
+          path: '@semantic-release/changelog',
+          changelogFile: 'src/changelog.md'
+        }
+      ],
+      publish: [
+        {
+          path: '@semantic-release/exec',
+          cmd: 'echo ##vso[build.updatebuildnumber]${nextRelease.version}'
+        },
+        {
+          path: '@semantic-release/exec',
+          cmd: 'echo ##vso[build.addbuildtag]release'
+        },
+        {
+          path: '@semantic-release/github',
+          assets: [
+            {
+              path: 'src/changelog.md',
+              label: 'Changelog'
+            }
+          ]
+        }
+      ],
+      fail: ['@semantic-release/github'],
+      success: ['@semantic-release/github'],
+      plugins: [['@semantic-release/commit-analyzer'], '@semantic-release/release-notes-generator']
+    });
+  });
+});
 
 describe('Sample task tests', function() {
   before(function() {});
