@@ -6,7 +6,7 @@
   "scripts": {
     "start": "env-cmd nodemon --inspect",
     "build": "tsc && cd .. && tfx extension create --manifest-globs vss-extension.json",
-    "test": "tsc && mocha tests/_suite.js"
+    "test": "tsc && mocha tests/*.test.js"
   },
   "repository": {
     "type": "git",
@@ -27,8 +27,7 @@
   },
   "homepage": "https://github.com/DanielHabenicht/AzurePipelines-SemanticRelease#readme",
   "dependencies": {
-    "azure-pipelines-task-lib": "^2.8.0",
-    "semantic-release": "^15.13.24"
+    "azure-pipelines-task-lib": "^2.8.0"
   },
   "devDependencies": {
     "@types/chai": "4.2.10",

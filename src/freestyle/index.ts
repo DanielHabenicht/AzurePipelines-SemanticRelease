@@ -8,10 +8,13 @@ async function run() {
   const localFolder = path.join(__dirname);
 
   const config = Utility.getConfig();
-
+  const taskPackageOverwrite = Utility.getTaskPackageOverwrite();
+  /**
+   * Installing needed NPM packages to run Semantic release
+   */
   tl.debug(`Executing NPM Command in: ${localFolder}`);
   const npm = new tr.ToolRunner('npm');
-  npm.line(`install --only=prod ${Utility.getNpmPackagesFromConfig(config).join(' ')}`);
+  npm.line(`install --only=prod ${Utility.getNpmPackages(config, taskPackageOverwrite).join(' ')}`);
   npm
     .exec({
       cwd: localFolder

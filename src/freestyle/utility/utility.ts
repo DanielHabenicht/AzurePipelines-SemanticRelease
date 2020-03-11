@@ -37,11 +37,11 @@ export class Utility {
    * Returns all packages used in the release config.
    * @param config The Semantic Release Config
    */
-  public static getNpmPackagesFromConfig(config: GlobalConfig): string[] {
-    const packages: string[] = [];
+  public static getNpmPackages(config: GlobalConfig, taskOverwrite: string[]): string[] {
+    const packages: string[] = taskOverwrite;
 
     if (!config.plugins) {
-      return [];
+      return packages;
     }
 
     // Get the packages used in the plugins section of the config
@@ -118,7 +118,7 @@ export class Utility {
   }
 
   public static addIfNotExist(array: string[], add: string): void {
-    if (!array.includes(add)) {
+    if (!array.map(p => Utility.getPackageNameWithoutVersion(p)).includes(Utility.getPackageNameWithoutVersion(add))) {
       array.push(add);
     }
   }
@@ -137,6 +137,14 @@ export class Utility {
         return JSON.parse(fs.readFileSync(tl.getPathInput('configPath', true, true), 'utf8')).release;
       }
     }
+  }
+
+  public static getTaskPackageOverwrite(): string[] {
+    return Utility.convertMultLinePackageStringToArray(tl.getInput('configMultiline', true));
+  }
+
+  public static convertMultLinePackageStringToArray(str: string) {
+    return str.match(/[^\r\n]+/g) || [];
   }
 
   public static getCredentials(): { [key: string]: string } {

@@ -127,6 +127,19 @@
             "required": true,
             "helpMarkDown": "The Working directory of Semantic Release",
             "groupName": "advanced"
+        },
+        {
+            "name": "plugins",
+            "type": "multiLine",
+            "label": "Plugin Versions",
+            "defaultValue": "@semantic-release/semantic-release@15",
+            "required": true,
+            "helpMarkDown": "Override the versions of the installed semantic-release package and plugins.",
+            "groupName": "advanced",
+            "validation": {
+                "expression": "isMatch(value, '@semanit-release\/semantic-release', '')",
+                "message": "Field must contain '@semanit-release\/semantic-release@17' version"
+            }
         }
     ],
     "execution": {
