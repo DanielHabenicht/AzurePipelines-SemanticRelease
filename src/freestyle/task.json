@@ -137,7 +137,7 @@
             "helpMarkDown": "Override the versions of the installed semantic-release package and plugins.",
             "groupName": "advanced",
             "validation": {
-                "expression": "isMatch(value, '@semanit-release\/semantic-release', '')",
+                "expression": "isMatch(value, '@semanit-release\/semantic-release', 'IgnoreCase,Multiline')",
                 "message": "Field must contain '@semanit-release\/semantic-release@17' version"
             }
         }
