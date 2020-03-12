@@ -3,7 +3,8 @@
     "name": "freestyle",
     "friendlyName": "Semantic Release Freestyle",
     "description": "Task for simplifying Semantic Release (${version})",
-    "helpMarkDown": "",
+    "helpMarkDown": "Find help on Github",
+    "helpUrl": "https://github.com/DanielHabenicht/AzurePipelines-SemanticRelease/issues",
     "category": "Utility",
     "visibility": [
         "Build",
