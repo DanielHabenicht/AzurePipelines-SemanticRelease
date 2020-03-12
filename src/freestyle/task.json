@@ -132,13 +132,13 @@
             "name": "versionOverwrite",
             "type": "multiLine",
             "label": "Version Overwrite",
-            "defaultValue": "@semantic-release/semantic-release@15",
+            "defaultValue": "semantic-release@15",
             "required": true,
             "helpMarkDown": "Override the versions of the installed semantic-release package and plugins.",
             "groupName": "advanced",
             "validation": {
-                "expression": "isMatch(value, '@semantic-release\/semantic-release', 'IgnoreCase,Multiline')",
-                "message": "Field must contain '@semantic-release\/semantic-release' package (maybe with version)"
+                "expression": "isMatch(value, 'semantic-release', 'IgnoreCase,Multiline')",
+                "message": "Field must contain 'semantic-release' package (maybe with version)"
             }
         }
     ],
