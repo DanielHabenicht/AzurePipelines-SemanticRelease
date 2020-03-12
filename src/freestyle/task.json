@@ -129,9 +129,9 @@
             "groupName": "advanced"
         },
         {
-            "name": "plugins",
+            "name": "versionOverwrite",
             "type": "multiLine",
-            "label": "Plugin Versions",
+            "label": "Version Overwrite",
             "defaultValue": "@semantic-release/semantic-release@15",
             "required": true,
             "helpMarkDown": "Override the versions of the installed semantic-release package and plugins.",

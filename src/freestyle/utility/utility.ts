@@ -140,7 +140,7 @@ export class Utility {
   }
 
   public static getTaskPackageOverwrite(): string[] {
-    return Utility.convertMultLinePackageStringToArray(tl.getInput('configMultiline', true));
+    return Utility.convertMultLinePackageStringToArray(tl.getInput('versionOverwrite', true));
   }
 
   public static convertMultLinePackageStringToArray(str: string) {

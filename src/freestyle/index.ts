@@ -1,7 +1,6 @@
 import tl = require('azure-pipelines-task-lib/task');
 import tr = require('azure-pipelines-task-lib/toolrunner');
 import * as path from 'path';
-import semanticRelease, { GlobalConfig } from 'semantic-release';
 import { Utility } from './utility/utility';
 
 async function run() {
@@ -24,8 +23,9 @@ async function run() {
     });
 }
 
-async function runSemanticRelease(config: GlobalConfig) {
+async function runSemanticRelease(config: any) {
   try {
+    let semanticRelease = require('semantic-release');
     const result = await semanticRelease(
       { ...Utility.removeVersionFromConfig(config) },
       {
