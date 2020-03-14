@@ -45,6 +45,13 @@
             "path": "freestyle"
         }
     ],
+    "badges": [
+        {
+            "href": "https://www.buymeacoffee.com/DanielHabenicht",
+            "uri": "https://cdn.buymeacoffee.com/buttons/default-orange.png",
+            "description": "Donate and buy me a coffe"
+        }
+    ],
     "contributions": [
         {
             "id": "tasks",
