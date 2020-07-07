@@ -1,41 +1,41 @@
 {
-    "name": "just-for-release",
-    "version": "0.0.0",
-    "description": "This package is just for releasing the extension",
-    "scripts": {
-        "test": "echo $GH_TOKEN",
-        "build": "cd ./src/freestyle && npm install && tsc",
-        "pre-package": "npm run build && rimraf dist && copyfiles -u 1 \"src{/*,}/{vss-extension.json,task.json,package.json,*.png,*.js,/!(tests)/*.js}\" dist -E && copyfiles README.md LICENSE dist -E && cd ./dist/freestyle && npm install --only=prod",
-        "package": "npm run pre-package && cd ./dist && tfx extension create --manifest-globs vss-extension.json",
-        "publish": "cd ./dist && cross-env-shell 'tfx extension publish --auth-type pat -t $MARKETPLACE_TOKEN --service-url \"https://marketplace.visualstudio.com/\" --manifest-globs vss-extension.json'",
-        "release": "npm install && semantic-release",
-        "release-dev": "semantic-release",
-        "azpipeline-tag": "cross-env-shell 'echo ##vso[build.addbuildtag]release'"
-    },
-    "dependencies": {
-        "@semantic-release/changelog": "5.0.1",
-        "@semantic-release/exec": "5.0.0",
-        "@semantic-release/git": "9.0.0",
-        "copyfiles": "2.2.0",
-        "cross-env": "7.0.2",
-        "rimraf": "3.0.2",
-        "semantic-release": "17.1.1",
-        "tfx-cli": "0.7.11",
-        "typescript": "3.8.3"
-    },
-    "release": {
-        "branch": "master",
-        "plugins": [
-            "@semantic-release/commit-analyzer",
-            "@semantic-release/release-notes-generator",
-            [
-                "@semantic-release/exec",
-                {
-                    "prepareCmd": "node updateVersionNumbers.js ${nextRelease.version} && npm run pre-package",
-                    "publishCmd": "npm run publish && npm run azpipeline-tag"
-                }
-            ],
-            "@semantic-release/github"
-        ]
-    }
+  "name": "just-for-release",
+  "version": "0.0.0",
+  "description": "This package is just for releasing the extension",
+  "scripts": {
+    "test": "echo $GH_TOKEN",
+    "build": "cd ./src/freestyle && npm install && tsc",
+    "pre-package": "npm run build && rimraf dist && copyfiles -u 1 \"src{/*,}/{vss-extension.json,task.json,package.json,*.png,*.js,/!(tests)/*.js}\" dist -E && copyfiles README.md LICENSE dist -E && cd ./dist/freestyle && npm install --only=prod",
+    "package": "npm run pre-package && cd ./dist && tfx extension create --manifest-globs vss-extension.json",
+    "publish": "cd ./dist && cross-env-shell 'tfx extension publish --auth-type pat -t $MARKETPLACE_TOKEN --service-url \"https://marketplace.visualstudio.com/\" --manifest-globs vss-extension.json'",
+    "release": "npm install && semantic-release",
+    "release-dev": "semantic-release",
+    "azpipeline-tag": "cross-env-shell 'echo ##vso[build.addbuildtag]release'"
+  },
+  "dependencies": {
+    "@semantic-release/changelog": "5.0.1",
+    "@semantic-release/exec": "5.0.0",
+    "@semantic-release/git": "9.0.0",
+    "copyfiles": "2.2.0",
+    "cross-env": "7.0.2",
+    "rimraf": "3.0.2",
+    "semantic-release": "17.1.1",
+    "tfx-cli": "0.7.11",
+    "typescript": "3.8.3"
+  },
+  "release": {
+    "branch": "master",
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator",
+      [
+        "@semantic-release/exec",
+        {
+          "prepareCmd": "node updateVersionNumbers.js ${nextRelease.version} && npm run pre-package",
+          "publishCmd": "npm run publish && npm run azpipeline-tag"
+        }
+      ],
+      "@semantic-release/github"
+    ]
+  }
 }
