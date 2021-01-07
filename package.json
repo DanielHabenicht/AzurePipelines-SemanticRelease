@@ -13,9 +13,9 @@
         "azpipeline-tag": "cross-env-shell 'echo ##vso[build.addbuildtag]release'"
     },
     "dependencies": {
-        "@semantic-release/changelog": "3.0.6",
-        "@semantic-release/exec": "3.3.8",
-        "@semantic-release/git": "7.0.18",
+        "@semantic-release/changelog": "5.0.1",
+        "@semantic-release/exec": "5.0.0",
+        "@semantic-release/git": "9.0.0",
         "copyfiles": "2.2.0",
         "cross-env": "7.0.2",
         "rimraf": "3.0.2",
